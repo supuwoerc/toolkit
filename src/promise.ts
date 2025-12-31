@@ -3,7 +3,7 @@
  * Delays execution with optional asynchronous callback
  *
  * @param {number} ms - 延迟的毫秒数 / Delay time in milliseconds
- * @param {() => any} [callback] - 可选的回调函数，将在延迟后执行 / Optional callback function to execute after delay
+ * @param {() => void} [callback] - 可选的回调函数，将在延迟后执行 / Optional callback function to execute after delay
  * @returns {Promise<void>} 延迟完成后解析的Promise / Promise that resolves after the delay
  * @example
  * // 等待1秒后执行
@@ -15,7 +15,7 @@
  * // Wait for 1 second then execute callback
  * await sleep(1000, () => console.log('Done'))
  */
-export function sleep(ms: number, callback?: () => any) {
+export function sleep(ms: number, callback?: () => void) {
   return new Promise<void>((resolve, reject) =>
     setTimeout(async () => {
       try {
@@ -99,11 +99,11 @@ export async function retry<T>(
     maxAttempts?: number
     delayMs?: number
     backoffFactor?: number
-    shouldRetry?: (error: any, attempt: number) => boolean
+    shouldRetry?: (error: unknown, attempt: number) => boolean
   } = {},
 ): Promise<T> {
   const { maxAttempts = 3, delayMs = 1000, backoffFactor = 2, shouldRetry = () => true } = options
-  let lastError: any
+  let lastError: unknown
   let currentDelay = delayMs
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
@@ -180,7 +180,7 @@ export async function allSettledWithResults<T>(promises: Promise<T>[]): Promise<
   Array<{
     status: 'fulfilled' | 'rejected'
     value?: T
-    error?: any
+    error?: unknown
   }>
 > {
   const results = await Promise.allSettled(promises)

@@ -36,9 +36,9 @@ export class Queue<T> {
    * 将元素添加到队列的末尾。
    * Adds an element to the end of the queue.
    *
-   * @param {any} value - 要添加到队列的值 / value to add to the queue
+   * @param {T} value - 要添加到队列的值 / value to add to the queue
    */
-  enqueue(value: any) {
+  enqueue(value: T) {
     this.#linkedList.push(value)
     return this
   }
@@ -49,9 +49,9 @@ export class Queue<T> {
    * 移除并返回队列的第一个元素（队首）。
    * Removes and returns the first element (front) of the queue.
    *
-   * @returns {any | undefined} 队列的第一个元素，如果队列为空则返回 undefined / the first element of the queue, or undefined if the queue is empty
+   * @returns {T | undefined} 队列的第一个元素，如果队列为空则返回 undefined / the first element of the queue, or undefined if the queue is empty
    */
-  dequeue(): any | undefined {
+  dequeue(): T | undefined {
     return this.#linkedList.shift()
   }
 
@@ -83,9 +83,9 @@ export class Queue<T> {
    * 返回队列的第一个元素但不移除它。
    * Returns the first element of the queue without removing it.
    *
-   * @returns {any | undefined} 队列的第一个元素，如果队列为空则返回 undefined / the first element of the queue, or undefined if the queue is empty
+   * @returns {T | undefined} 队列的第一个元素，如果队列为空则返回 undefined / the first element of the queue, or undefined if the queue is empty
    */
-  peek(): any | undefined {
+  peek(): T | undefined {
     return this.#linkedList.front()
   }
 
@@ -95,7 +95,7 @@ export class Queue<T> {
    * 一个生成器函数，逐步出队所有元素。
    * A generator function that gradually dequeues all elements.
    *
-   * @yields {any | undefined} 队列中的每个元素（按出队顺序）/ each element in the queue (in dequeue order)
+   * @yields {T | undefined} 队列中的每个元素（按出队顺序）/ each element in the queue (in dequeue order)
    *
    * @example
    * // 使用 drain 逐步处理队列 / Use drain to process queue gradually
@@ -106,7 +106,7 @@ export class Queue<T> {
    */
   *drain() {
     while (!this.#linkedList.isEmpty) {
-      yield this.#linkedList.shift() as T
+      yield this.#linkedList.shift()
     }
   }
 

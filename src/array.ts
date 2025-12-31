@@ -89,7 +89,7 @@ export function shuffleImmutable<T>(array: readonly T[]): T[] {
 /**
  * 根据自定义相等函数对数组进行去重 / Deduplicate array by custom equality function
  * @param {readonly T[]} array - 需要去重的数组 / The array to deduplicate
- * @param {(a: any, b: any) => boolean} equalFn - 判断两个元素是否相等的函数 / Function to determine if two elements are equal
+ * @param {(a: T, b: T) => boolean} equalFn - 判断两个元素是否相等的函数 / Function to determine if two elements are equal
  * @returns {T[]} 去重后的新数组 / New array with duplicates removed
  * @template T - 数组元素类型 / Array element type
  * @example
@@ -97,9 +97,9 @@ export function shuffleImmutable<T>(array: readonly T[]): T[] {
  * const result = uniqueBy(arr, (a, b) => a.id === b.id)
  * // result: [{id: 1}, {id: 2}]
  */
-export function uniqueBy<T>(array: readonly T[], equalFn: (a: any, b: any) => boolean): T[] {
-  return array.reduce((prev: T[], cur: any) => {
-    const index = prev.findIndex((item: any) => equalFn(cur, item))
+export function uniqueBy<T>(array: readonly T[], equalFn: (a: T, b: T) => boolean): T[] {
+  return array.reduce((prev: T[], cur: T) => {
+    const index = prev.findIndex((item: T) => equalFn(cur, item))
     if (index === -1) {
       prev.push(cur)
     }
