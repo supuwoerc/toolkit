@@ -1,7 +1,7 @@
 {
   "name": "@supuwoerc/toolkit",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a collection of utility functions for JavaScript/TypeScript",
   "author": {
     "name": "Idris",
